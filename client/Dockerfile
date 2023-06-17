@@ -1,0 +1,15 @@
+ARG ALPINE_VERSION=3.18
+ARG GOLANG_VERSION=1.20
+ARG COMPILER=golang:${GOLANG_VERSION}-alpine${ALPINE_VERSION}
+ARG CGO_ENABLED=0
+
+FROM ${COMPILER} AS build
+RUN apk update
+
+WORKDIR /app
+COPY  . .
+RUN go build -o client cmd/client/main.go
+
+EXPOSE 8080
+ENTRYPOINT ["./client"]
+CMD ["8080"]

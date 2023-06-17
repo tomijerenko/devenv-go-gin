@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  server:
+    image: devenv-go-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+
+  client:
+    image: devenv-go-client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8081:8080
